@@ -69,6 +69,98 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-lds问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/06/04/lds%E9%97%AE%E9%A2%98/" class="article-date">
+  <time class="dt-published" datetime="2024-06-04T15:56:27.000Z" itemprop="datePublished">2024-06-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/06/04/lds%E9%97%AE%E9%A2%98/">链接+汇编初始化数据段失败的问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h4 id="关于链接脚本和汇编导致的数据段初始化错误的问题"><a href="#关于链接脚本和汇编导致的数据段初始化错误的问题" class="headerlink" title="关于链接脚本和汇编导致的数据段初始化错误的问题"></a>关于链接脚本和汇编导致的数据段初始化错误的问题</h4><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>第一个链接脚本存在data 段初始化失败的问题，第二个link 脚本增加了At&gt;flash就可以正常的运行了，是为什么？如果只是链接错误的话，那么汇编从ram 向同地址的ram 中搬运为什么就会运行出错？</p>
+<hr>
+<p>链接脚本分别如下：</p>
+<ul>
+<li>有错误的类型</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">MEMORY</span><br><span class="line">&#123;</span><br><span class="line">  flash (rxai!w) : ORIGIN = <span class="number">0x20000000</span>, LENGTH = <span class="number">256</span>k</span><br><span class="line">  ram   (wxa!ri) : ORIGIN = <span class="number">0x20040000</span>, LENGTH = <span class="number">384</span>k   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  .lalign         :</span><br><span class="line">  &#123;</span><br><span class="line">    . = ALIGN(<span class="number">4</span>);</span><br><span class="line">    PROVIDE( _data_lma = . );</span><br><span class="line">  &#125; &gt; flash</span><br><span class="line"></span><br><span class="line">  .dalign         :</span><br><span class="line">  &#123;</span><br><span class="line">    . = ALIGN(<span class="number">4</span>);</span><br><span class="line">    PROVIDE( _data = . );</span><br><span class="line">  &#125; &gt; ram </span><br><span class="line"></span><br><span class="line">  .data          :</span><br><span class="line">  &#123;</span><br><span class="line">    *(.data .data.*)</span><br><span class="line">    *(.gnu.linkonce.d.*)</span><br><span class="line">    . = ALIGN(<span class="number">8</span>);</span><br><span class="line">    PROVIDE( __global_pointer$ = . + <span class="number">0x800</span> );</span><br><span class="line">    *(.sdata .sdata.*)</span><br><span class="line">    *(.gnu.linkonce.s.*)</span><br><span class="line">    . = ALIGN(<span class="number">8</span>);</span><br><span class="line">    *(.srodata.cst16)</span><br><span class="line">    *(.srodata.cst8)</span><br><span class="line">    *(.srodata.cst4)</span><br><span class="line">    *(.srodata.cst2)</span><br><span class="line">    *(.srodata .srodata.*)</span><br><span class="line">  &#125; &gt; ram </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>没有错误的类型</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">.lalign         :</span><br><span class="line">&#123;</span><br><span class="line">  . = ALIGN(<span class="number">4</span>);</span><br><span class="line">  PROVIDE( _data_lma = . );</span><br><span class="line">&#125; &gt;rom AT&gt;flash :flash</span><br><span class="line"></span><br><span class="line">.dalign         :</span><br><span class="line">&#123;</span><br><span class="line">  . = ALIGN(<span class="number">4</span>);</span><br><span class="line">  PROVIDE( _data = . );</span><br><span class="line">&#125; &gt;ram AT&gt;flash :ram_init</span><br><span class="line"></span><br><span class="line">.data          :</span><br><span class="line">&#123;</span><br><span class="line">  *(.data .data.*)</span><br><span class="line">  *(.gnu.linkonce.d.*)</span><br><span class="line">  . = ALIGN(<span class="number">8</span>);</span><br><span class="line">  PROVIDE( __global_pointer$ = . + <span class="number">0x800</span> );</span><br><span class="line">  *(.sdata .sdata.*)</span><br><span class="line">  *(.gnu.linkonce.s.*)</span><br><span class="line">  . = ALIGN(<span class="number">8</span>);</span><br><span class="line">  *(.srodata.cst16)</span><br><span class="line">  *(.srodata.cst8)</span><br><span class="line">  *(.srodata.cst4)</span><br><span class="line">  *(.srodata.cst2)</span><br><span class="line">  *(.srodata .srodata.*)</span><br><span class="line">&#125; &gt;ram AT&gt;flash :ram_init</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>汇编语言搬运data段的操作</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">	la a0, _data_lma</span><br><span class="line">	la a1, _data</span><br><span class="line">	la a2, _edata</span><br><span class="line">	bgeu a1, a2, <span class="number">2f</span></span><br><span class="line"><span class="number">1</span>:</span><br><span class="line">	lw t0, (a0)</span><br><span class="line">	sw t0, (a1)</span><br><span class="line">	addi a0, a0, <span class="number">4</span></span><br><span class="line">	addi a1, a1, <span class="number">4</span></span><br><span class="line">	bltu a1, a2, <span class="number">1b</span></span><br><span class="line"><span class="number">2</span>:</span><br></pre></td></tr></table></figure>
+
+<h4 id="分析如下："><a href="#分析如下：" class="headerlink" title="分析如下："></a>分析如下：</h4><ul>
+<li><p>原来存在的问题和分析思路</p>
+<ul>
+<li>问题：上诉所说第一个链接脚本存在data 段初始化失败的问题，第二个link 脚本增加了At&gt;flash就可以正常的运行了，是为什么？如果只是链接错误的话，那么汇编从ram 向同地址的ram 中搬运为什么就会运行出错？</li>
+<li>解决思路：<ul>
+<li><ol>
+<li>确认链接器会把data 段的数据放在哪里？</li>
+<li>真正代码跑起来的时候，mcu 会去哪里取代码？这个是由谁决定的？连接器还是编译器？</li>
+<li>目前问题的逻辑解释</li>
+</ol>
+</li>
+<li>对于问题1：一般情况下不加AT 属性就会编译在哪个内存空间，就存放在哪个内存空间。</li>
+<li>对于问题2：真正代码跑起来的时候，mcu 会去ram 中取data段，这个是由连接器决定的（连接器会 为每个符号分配地址？），因为两个lds 文件都是把data 段放在了ram 的区域。</li>
+</ul>
+</li>
+<li>原因解释，对应这个问题，有以下几点<ul>
+<li><ol>
+<li>符号的定义，结合上面的lds 源码，_data_lma 永远在 flash地址，_data永远在ram地址</li>
+<li>汇编代码：结合汇编，永远是从_data_lma  搬运 到data 地址处</li>
+<li>链接脚本：第一种错误的链接脚本，没有加<code>At&gt;flash</code>,data 段存放和使用地址都在 ram区域（<em>data</em> 地址开始），这个时候汇编代码还将_data_lma_ 的数据搬运到 <em>data</em> 处就会导致将错误的数据覆盖了正确的数据。</li>
+<li>第二种正确的链接脚本，加个<code>At&gt;flash</code>，data 段存放地址在_data_lma_ 开始的地址和使用地址在_data_开始的地址，这个时候利用汇编代码将_data_lma_ 的数据搬运到 <em>data</em> 处，就是将数据搬运到了改在的位置，程序能正常运行。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>对于符号的数值定义很重要</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">MEMORY</span><br><span class="line">&#123;</span><br><span class="line">  flash (rxai!w) : ORIGIN = <span class="number">0x20000000</span>, LENGTH = <span class="number">256</span>k</span><br><span class="line">  ram   (wxa!ri) : ORIGIN = <span class="number">0x20040000</span>, LENGTH = <span class="number">384</span>k   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  .lalign         :</span><br><span class="line">  &#123;</span><br><span class="line">    . = ALIGN(<span class="number">4</span>);</span><br><span class="line">    PROVIDE( _data_lma = . ); <span class="comment">/* 这里的_data_lma  可以看到就是flash 中的地址 */</span></span><br><span class="line">  &#125; &gt; flash</span><br><span class="line"></span><br><span class="line">  .dalign         :</span><br><span class="line">  &#123;</span><br><span class="line">    . = ALIGN(<span class="number">4</span>);</span><br><span class="line">    PROVIDE( _data = . ); <span class="comment">/*  这里的 _data 地址是ram中的地址*/</span></span><br><span class="line">  &#125; &gt; ram </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>由于链接的时候选择了将.data 段编译到了ram 中，所以实际的时候取数会去ram的地址取值。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> .data          :</span><br><span class="line"> &#123;</span><br><span class="line">、、、、、、</span><br><span class="line"> &#125; &gt;ram</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="待后续补充"><a href="#待后续补充" class="headerlink" title="待后续补充"></a>待后续补充</h5><ul>
+<li>用readelf 查看两种编译方式编译出来的section的区别</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/06/04/lds%E9%97%AE%E9%A2%98/" data-id="clx0laq2400004kur0sxp06c3" data-title="链接+汇编初始化数据段失败的问题" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/06/04/hello-world/" class="article-date">
@@ -108,7 +200,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/06/04/hello-world/" data-id="clx0l5ixp0001e8ur321h9cnx" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/06/04/hello-world/" data-id="clx0laq2700014kurdznj9oqj" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -149,6 +241,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2024/06/04/lds%E9%97%AE%E9%A2%98/">链接+汇编初始化数据段失败的问题</a>
+          </li>
         
           <li>
             <a href="/2024/06/04/hello-world/">Hello World</a>
