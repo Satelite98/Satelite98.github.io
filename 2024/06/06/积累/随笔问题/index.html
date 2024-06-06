@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Hexo</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hexo"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hexo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="[toc] 问题 ：makefile 中.bulid makefile .mk 这三种文件有什么区别吗？在使用 make 工具时，makefile.build、makefile 和 .mk 这三种文件名有一些区别，但主要在于命名惯例和使用习惯方面，而不在于 make 工具本身的功能上。  makefile:  这是默认的 make 文件名。如果你在命令行中仅输入 make 而不指定任何文件，mak"><meta property="og:type" content="blog"><meta property="og:title" content="Hexo"><meta property="og:url" content="https://satelite98.github.io/2024/06/06/%E7%A7%AF%E7%B4%AF/%E9%9A%8F%E7%AC%94%E9%97%AE%E9%A2%98/"><meta property="og:site_name" content="Hexo"><meta property="og:description" content="[toc] 问题 ：makefile 中.bulid makefile .mk 这三种文件有什么区别吗？在使用 make 工具时，makefile.build、makefile 和 .mk 这三种文件名有一些区别，但主要在于命名惯例和使用习惯方面，而不在于 make 工具本身的功能上。  makefile:  这是默认的 make 文件名。如果你在命令行中仅输入 make 而不指定任何文件，mak"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://satelite98.github.io/img/og_image.png"><meta property="article:published_time" content="2024-06-06T15:00:09.076Z"><meta property="article:modified_time" content="2024-06-06T15:01:40.510Z"><meta property="article:author" content="John Doe"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://satelite98.github.io/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://satelite98.github.io/2024/06/06/%E7%A7%AF%E7%B4%AF/%E9%9A%8F%E7%AC%94%E9%97%AE%E9%A2%98/"},"headline":"Hexo","image":["https://satelite98.github.io/img/og_image.png"],"datePublished":"2024-06-06T15:00:09.076Z","dateModified":"2024-06-06T15:01:40.510Z","author":{"@type":"Person","name":"John Doe"},"publisher":{"@type":"Organization","name":"Hexo","logo":{"@type":"ImageObject","url":"https://satelite98.github.io/img/logo.svg"}},"description":"[toc] 问题 ：makefile 中.bulid makefile .mk 这三种文件有什么区别吗？在使用 make 工具时，makefile.build、makefile 和 .mk 这三种文件名有一些区别，但主要在于命名惯例和使用习惯方面，而不在于 make 工具本身的功能上。  makefile:  这是默认的 make 文件名。如果你在命令行中仅输入 make 而不指定任何文件，mak"}</script><link rel="canonical" href="https://satelite98.github.io/2024/06/06/%E7%A7%AF%E7%B4%AF/%E9%9A%8F%E7%AC%94%E9%97%AE%E9%A2%98/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.2.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Hexo" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-06-06T15:00:09.076Z" title="2024/6/6 23:00:09">2024-06-06</time>发表</span><span class="level-item"><time dateTime="2024-06-06T15:01:40.510Z" title="2024/6/6 23:01:40">2024-06-06</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%A7%AF%E7%B4%AF/">积累</a></span><span class="level-item">20 分钟读完 (大约2964个字)</span></div></div><div class="content"><p>[toc]</p>
+<h3 id="问题-：makefile-中-bulid-makefile-mk-这三种文件有什么区别吗？"><a href="#问题-：makefile-中-bulid-makefile-mk-这三种文件有什么区别吗？" class="headerlink" title="问题 ：makefile 中.bulid makefile .mk 这三种文件有什么区别吗？"></a>问题 ：makefile 中.bulid makefile .mk 这三种文件有什么区别吗？</h3><p>在使用 <code>make</code> 工具时，<code>makefile.build</code>、<code>makefile</code> 和 <code>.mk</code> 这三种文件名有一些区别，但主要在于命名惯例和使用习惯方面，而不在于 <code>make</code> 工具本身的功能上。</p>
+<ol>
+<li><p><strong>makefile</strong>:</p>
+<ul>
+<li>这是默认的 <code>make</code> 文件名。如果你在命令行中仅输入 <code>make</code> 而不指定任何文件，<code>make</code> 会自动查找名为 <code>makefile</code> 或 <code>Makefile</code> 的文件并执行其中的规则。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>由于这是默认文件名，所以这是最常见的命名方式。</li>
+</ul>
+<ol start="2">
+<li><p><strong>makefile.build</strong>:</p>
+<ul>
+<li>这不是 <code>make</code> 的默认文件名，需要通过指定 <code>-f</code> 选项来使用。例如，<code>make -f makefile.build</code>。</li>
+<li>这种命名通常用于区分不同的构建文件，比如在同一个项目中有多个构建文件时，可以通过不同的后缀来区分其用途（例如，特定的构建配置或步骤）。</li>
+</ul>
+</li>
+<li><p><strong>.mk</strong>:</p>
+<ul>
+<li>这是另一种常见的命名方式，特别是在更复杂的项目或构建系统中。这种文件通常被包含在主 <code>makefile</code> 中，而不是直接由 <code>make</code> 命令执行。</li>
+<li>例如，一个项目可能有一个主 <code>makefile</code> 文件，其中包含了多个 <code>.mk</code> 文件，这些文件可能包含特定的规则或变量定义：<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span> config.mk</span><br><span class="line"><span class="keyword">include</span> rules.mk</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<p>总结：</p>
+<ul>
+<li><code>makefile</code> 是 <code>make</code> 的默认文件名，最常见。</li>
+<li><code>makefile.build</code> 等带有后缀的文件需要通过 <code>make -f</code> 来指定，通常用于区分不同的构建配置或步骤。</li>
+<li><code>.mk</code> 文件常用于被主 <code>makefile</code> 包含，帮助组织和管理复杂的构建系统。</li>
+</ul>
+<p>这些命名差异主要是基于项目的组织结构和开发者的习惯，而不是 <code>make</code> 工具本身的功能差异。</p>
+<p><code>.build</code> 文件需要用 <code>make -f</code> 来指定的原因是 <code>make</code> 工具默认只识别特定名称的文件作为其构建脚本，即 <code>makefile</code> 或 <code>Makefile</code>。如果构建脚本的名称不同于这两个默认名称，<code>make</code> 工具就需要明确地告知使用哪个文件。这是通过 <code>-f</code> 选项来实现的。</p>
+<p>具体来说，<code>make</code> 在执行时会自动查找当前目录下是否存在名为 <code>makefile</code> 或 <code>Makefile</code> 的文件。如果找不到这两个文件名之一，<code>make</code> 会报错说找不到构建文件。在这种情况下，或者如果你有多个构建文件且希望使用一个非默认名称的构建文件，你需要使用 <code>-f</code> 选项来指定文件名。例如：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make -f makefile.build</span><br></pre></td></tr></table></figure>
+
+<p>这是为了提供灵活性，让开发者能够根据项目需求创建多个不同的构建文件，并通过显式指定来选择要使用的构建脚本。</p>
+<p>以下是一些使用场景和原因：</p>
+<ol>
+<li><p><strong>多配置构建</strong>：</p>
+<ul>
+<li>一个项目可能有多个配置，比如调试和发布配置，每个配置可以有独立的构建文件。</li>
+<li><code>make -f makefile.debug</code> 和 <code>make -f makefile.release</code> 可以分别执行不同的构建配置。</li>
+</ul>
+</li>
+<li><p><strong>模块化构建</strong>：</p>
+<ul>
+<li>大型项目可能会将构建规则分割到多个文件中，每个文件专注于项目的某个部分或模块。</li>
+<li>例如，可以有 <code>makefile.core</code>、<code>makefile.gui</code> 等，然后通过 <code>make -f</code> 来选择构建哪个部分。</li>
+</ul>
+</li>
+<li><p><strong>特殊构建任务</strong>：</p>
+<ul>
+<li>某些构建任务可能需要特定的构建脚本，例如用于生成文档或运行测试。</li>
+<li><code>make -f makefile.docs</code> 可以专门用于生成项目文档，而 <code>make -f makefile.tests</code> 用于运行测试。</li>
+</ul>
+</li>
+</ol>
+<p>通过使用 <code>-f</code> 选项指定非默认的构建文件名称，<code>make</code> 工具可以更灵活地处理各种构建场景，满足不同项目和开发流程的需求。</p>
+<h3 id="makefile-if-函数"><a href="#makefile-if-函数" class="headerlink" title="makefile $(if ) 函数"></a>makefile $(if ) 函数</h3><p><code>$(if)</code> 函数是 GNU <code>make</code> 提供的一个条件函数，用于在 <code>makefile</code> 中执行简单的条件判断。它的基本语法如下：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$(<span class="built_in">if</span> condition,then-part[,else-part])</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>condition</code>: 这是一个条件表达式。如果这个表达式的值不为空字符串，则被认为是真。</li>
+<li><code>then-part</code>: 当 <code>condition</code> 为真时，返回 <code>then-part</code> 的值。</li>
+<li><code>else-part</code>（可选）：当 <code>condition</code> 为假时，返回 <code>else-part</code> 的值。如果省略 <code>else-part</code>，则在条件为假时返回空字符串。</li>
+</ul>
+<ul>
+<li>示例</li>
+</ul>
+<p>假设你有一个变量 <code>DEBUG</code>，用于控制是否进行调试构建。可以使用 <code>$(if)</code> 来决定编译选项：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DEBUG := 1</span><br><span class="line"></span><br><span class="line">CFLAGS := <span class="variable">$(<span class="built_in">if</span> <span class="variable">$(DEBUG)</span>,-g,-O2)</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，如果 <code>DEBUG</code> 不为空（即，条件为真），<code>CFLAGS</code> 将被设置为 <code>-g</code>（启用调试信息）。否则，<code>CFLAGS</code> 将被设置为 <code>-O2</code>（优化等级 2）。</p>
+<ul>
+<li>更复杂的例子</li>
+</ul>
+<p>你可以嵌套使用 <code>$(if)</code> 函数，创建更复杂的条件逻辑：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">VAR1 := foo</span><br><span class="line">VAR2 := bar</span><br><span class="line"></span><br><span class="line">RESULT := <span class="variable">$(<span class="built_in">if</span> <span class="variable">$(VAR1)</span>,$(<span class="built_in">if</span> <span class="variable">$(VAR2)</span>,both non-empty,<span class="variable">$(VAR1)</span> non-empty)</span>,VAR1 empty)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果 VAR1 和 VAR2 都不为空，则 RESULT 为 &quot;both non-empty&quot;</span></span><br><span class="line"><span class="comment"># 如果 VAR1 不为空但 VAR2 为空，则 RESULT 为 &quot;foo non-empty&quot;</span></span><br><span class="line"><span class="comment"># 如果 VAR1 为空，则 RESULT 为 &quot;VAR1 empty&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>示例：目标文件的选择</li>
+</ul>
+<p>假设你有两个不同版本的目标文件，你可以使用 <code>$(if)</code> 根据一个变量来选择其中一个：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">VERSION := 1</span><br><span class="line"></span><br><span class="line">OBJ_FILES := <span class="variable">$(<span class="built_in">if</span> <span class="variable">$(VERSION)</span>,version1.o,version2.o)</span></span><br><span class="line"></span><br><span class="line"><span class="section">all: <span class="variable">$(OBJ_FILES)</span></span></span><br><span class="line">	<span class="variable">$(CC)</span> -o my_program <span class="variable">$(OBJ_FILES)</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，如果 <code>VERSION</code> 不为空，则 <code>OBJ_FILES</code> 将被设置为 <code>version1.o</code>；否则，设置为 <code>version2.o</code>。</p>
+<ul>
+<li>使用环境变量</li>
+</ul>
+<p>你也可以结合环境变量来使用 <code>$(if)</code> 函数。例如：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">INSTALL_DIR := <span class="variable">$(<span class="built_in">if</span> <span class="variable">$(PREFIX)</span>,<span class="variable">$(PREFIX)</span>/usr/local,/usr/local)</span></span><br><span class="line"></span><br><span class="line"><span class="section">install:</span></span><br><span class="line">	cp my_program <span class="variable">$(INSTALL_DIR)</span>/bin</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，如果环境变量 <code>PREFIX</code> 被设置了，<code>INSTALL_DIR</code> 将使用 <code>PREFIX</code> 指定的目录；否则，将使用默认目录 <code>/usr/local</code>。</p>
+<h4 id="wildcard-函数"><a href="#wildcard-函数" class="headerlink" title="$(wildcard) 函数"></a>$(wildcard) 函数</h4><p>在 GNU <code>make</code> 中，<code>$(wildcard)</code> 函数用于扩展模式匹配符并返回与模式匹配的文件列表。它在自动化文件查找和管理中非常有用，特别是在处理源文件或其他需要动态查找的文件时。</p>
+<p>其基本语法是：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$(<span class="built_in">wildcard</span> pattern)</span></span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>pattern</code> 是包含通配符（如 <code>*</code>、<code>?</code>）的模式字符串。</p>
+<p>假设你在当前目录下有以下文件：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">main.c</span><br><span class="line">utils.c</span><br><span class="line">main.h</span><br><span class="line">utils.h</span><br><span class="line">readme.txt</span><br></pre></td></tr></table></figure>
+
+<p>你可以使用 <code>$(wildcard)</code> 来找到所有 <code>.c</code> 文件：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SRC_FILES := <span class="variable">$(<span class="built_in">wildcard</span> *.c)</span></span><br></pre></td></tr></table></figure>
+
+<p>此时，<code>SRC_FILES</code> 将包含 <code>main.c</code> 和 <code>utils.c</code>。</p>
+<p>你还可以将目录名和文件模式结合在变量中使用，例如：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SRC_DIR := src</span><br><span class="line">SRC_FILES := <span class="variable">$(<span class="built_in">wildcard</span> <span class="variable">$(SRC_DIR)</span>/*.c)</span></span><br></pre></td></tr></table></figure>
+
+<p>假设 <code>src</code> 目录下有 <code>file1.c</code> 和 <code>file2.c</code> 文件，则 <code>SRC_FILES</code> 将包含 <code>src/file1.c</code> 和 <code>src/file2.c</code>。</p>
+<p>以下是一些具体的使用示例：</p>
+<ol>
+<li><p>自动生成对象文件列表：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SRC_FILES := <span class="variable">$(<span class="built_in">wildcard</span> *.c)</span></span><br><span class="line">OBJ_FILES := <span class="variable">$(<span class="built_in">patsubst</span> %.c,%.o,<span class="variable">$(SRC_FILES)</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="section">all: my_program</span></span><br><span class="line"></span><br><span class="line"><span class="section">my_program: <span class="variable">$(OBJ_FILES)</span></span></span><br><span class="line">	<span class="variable">$(CC)</span> -o <span class="variable">$@</span> <span class="variable">$^</span></span><br><span class="line"></span><br><span class="line"><span class="section">%.o: %.c</span></span><br><span class="line">	<span class="variable">$(CC)</span> -c <span class="variable">$&lt;</span> -o <span class="variable">$@</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，<code>SRC_FILES</code> 自动包含当前目录下所有的 <code>.c</code> 文件，并生成对应的 <code>.o</code> 文件列表存储在 <code>OBJ_FILES</code> 变量中。</p>
+</li>
+<li><p>查找特定类型的文件：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HEADER_FILES := <span class="variable">$(<span class="built_in">wildcard</span> *.h)</span></span><br></pre></td></tr></table></figure>
+
+<p><code>HEADER_FILES</code> 将包含所有 <code>.h</code> 文件。</p>
+</li>
+</ol>
+<p>如果你的项目结构包含子目录，可以使用递归通配符来查找子目录中的文件（GNU make 4.0 及以上版本支持）：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SRC_FILES := <span class="variable">$(<span class="built_in">wildcard</span> src/**/*.c)</span></span><br></pre></td></tr></table></figure>
+
+<p>这个命令将查找 <code>src</code> 目录及其所有子目录中的 <code>.c</code> 文件。</p>
+<p>你可以结合 <code>$(wildcard)</code> 和 <code>$(foreach)</code> 实现更复杂的文件查找逻辑。例如，查找多个目录中的文件：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DIRS := src lib tests</span><br><span class="line">SRC_FILES := <span class="variable">$(<span class="built_in">foreach</span> <span class="built_in">dir</span>,<span class="variable">$(DIRS)</span>,$(<span class="built_in">wildcard</span> <span class="variable">$(dir)</span>/*.c)</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这个例子会在 <code>src</code>、<code>lib</code> 和 <code>tests</code> 目录中查找所有的 <code>.c</code> 文件，并将它们存储在 <code>SRC_FILES</code> 中。</p>
+<p><code>$(wildcard)</code> 函数在 <code>makefile</code> 中是一个非常强大的工具，能够自动查找匹配特定模式的文件，使得构建过程更加灵活和自动化。通过结合使用变量、模式匹配和其他 <code>make</code> 函数，可以实现复杂的文件管理和构建规则。</p>
+<h4 id="patsubst-函数"><a href="#patsubst-函数" class="headerlink" title="$(patsubst) 函数"></a>$(patsubst) 函数</h4><p><code>$(patsubst)</code> 是一个 GNU Make 函数，用于模式替换。它在一组单词中，将符合指定模式的部分替换为另一个字符串。</p>
+<p>基本语法：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#          匹配规则  替换结果     替换源</span></span><br><span class="line"><span class="variable">$(<span class="built_in">patsubst</span> pattern,replacement,text)</span>  </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>pattern</code>：模式，使用 <code>%</code> 表示通配符。</li>
+<li><code>replacement</code>：替换的字符串，同样可以包含 <code>%</code> 以表示与模式中通配符对应的部分。</li>
+<li><code>text</code>：要进行模式替换的文本。</li>
+</ul>
+<p>示例：<br>假设有如下 Makefile 代码：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sources = foo.c bar.c baz.c</span><br><span class="line">objects = <span class="variable">$(<span class="built_in">patsubst</span> %.c,%.o,<span class="variable">$(sources)</span>)</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中：</p>
+<ul>
+<li><code>sources</code> 定义了一组源文件列表。</li>
+<li><code>$(patsubst %.c,%.o,$(sources))</code> 将 <code>sources</code> 列表中每个以 <code>.c</code> 结尾的文件替换成以 <code>.o</code> 结尾的文件。</li>
+</ul>
+<p>结果：</p>
+<ul>
+<li><code>objects</code> 将包含 <code>foo.o bar.o baz.o</code>。</li>
+</ul>
+<h4 id="的用法举例"><a href="#的用法举例" class="headerlink" title="$&lt; 的用法举例"></a>$&lt; 的用法举例</h4><p>在 Makefile 中，<code>$&lt;</code> 是一个自动变量，用于表示第一个依赖文件。它通常用于规则的配方（recipe）中，以便引用目标文件的第一个依赖文件。</p>
+<p>下面是一个简单的例子，展示了如何使用 <code>$&lt;</code>：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义编译器和编译选项</span></span><br><span class="line">CC = gcc</span><br><span class="line">CFLAGS = -Wall -g</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义目标文件</span></span><br><span class="line">TARGET = myprogram</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义源文件和对象文件</span></span><br><span class="line">SRCS = main.c utils.c</span><br><span class="line">OBJS = $(SRCS:.c=.o)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 默认目标</span></span><br><span class="line"><span class="section">all: <span class="variable">$(TARGET)</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 链接目标文件</span></span><br><span class="line"><span class="variable">$(TARGET)</span>: <span class="variable">$(OBJS)</span></span><br><span class="line">    <span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -o <span class="variable">$@</span> <span class="variable">$^</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译源文件到对象文件</span></span><br><span class="line"><span class="section">%.o: %.c</span></span><br><span class="line">    <span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -c <span class="variable">$&lt;</span> -o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 清理生成的文件</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    rm -f <span class="variable">$(OBJS)</span> <span class="variable">$(TARGET)</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个示例中，<code>%.o: %.c</code> 是一个模式规则，表示所有的 <code>.c</code> 文件都会被编译成对应的 <code>.o</code> 文件。在该规则的配方中，<code>$&lt;</code> 用于表示模式匹配的第一个依赖文件，即当前正在被编译的 <code>.c</code> 文件。</p>
+<p>例如，当 <code>main.c</code> 需要被编译时，<code>$&lt;</code> 的值就是 <code>main.c</code>，对应的命令行就是：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -Wall -g -c main.c -o main.o</span><br></pre></td></tr></table></figure>
+
+<p>同样地，当 <code>utils.c</code> 需要被编译时，<code>$&lt;</code> 的值就是 <code>utils.c</code>，对应的命令行就是：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -Wall -g -c utils.c -o utils.o</span><br></pre></td></tr></table></figure>
+
+<p>通过使用 <code>$&lt;</code>，可以使 Makefile 更加简洁和灵活，因为它自动引用了当前的源文件，而无需手动指定。</p>
+<h4 id="Makefile-什么时候会执行结束"><a href="#Makefile-什么时候会执行结束" class="headerlink" title="Makefile 什么时候会执行结束"></a>Makefile 什么时候会执行结束</h4><p>在Makefile中，行的结束由换行符（\n）或分号（;）来表示。Make会按行读取Makefile，并执行每一行中的命令，直到遇到一个新的规则或者文件结束。</p>
+<p>如果一行太长而无法在一行中显示，可以使用反斜杠（\）将其分隔成多行。Make会将多行拼接在一起视为单独的一行。例如：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">target: dependency1 dependency2 \</span></span><br><span class="line">         dependency3</span><br><span class="line">    command1</span><br><span class="line">    command2</span><br></pre></td></tr></table></figure>
+
+<p>这个规则定义了一个名为target的目标，它依赖于dependency1、dependency2和dependency3。当这个目标被执行时，会依次执行command1和command2。Make会将命令1和命令2视为同一行的一部分，直到遇到一个新的规则或文件结束。</p>
+<p>因此，Make会根据换行符、分号以及反斜杠来确定命令的结束，而不是根据特定的行结束符。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p><a href="https://satelite98.github.io/2024/06/06/积累/随笔问题/">https://satelite98.github.io/2024/06/06/积累/随笔问题/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>John Doe</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2024-06-06</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-06-06</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>爱发电</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2024/06/06/%E7%A7%AF%E7%B4%AF/vscode+clangd/"><span class="level-item"> </span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/my.png" alt="Satellite"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Satellite</p><p class="is-size-6 is-block">none</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>SZHOU,CHINA</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">13</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">2</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">0</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ppoffice" target="_blank" rel="me noopener">关注我</a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li><li><a class="level is-mobile" href="https://bulma.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bulma</span></span><span class="level-right"><span class="level-item tag">bulma.io</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/uboot-linux/"><span class="level-start"><span class="level-item">uboot_linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%A7%AF%E7%B4%AF/"><span class="level-start"><span class="level-item">积累</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-06-06T15:00:09.076Z">2024-06-06</time></p><p class="title"><a href="/2024/06/06/%E7%A7%AF%E7%B4%AF/%E9%9A%8F%E7%AC%94%E9%97%AE%E9%A2%98/"> </a></p><p class="categories"><a href="/categories/%E7%A7%AF%E7%B4%AF/">积累</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-06-06T15:00:09.075Z">2024-06-06</time></p><p class="title"><a href="/2024/06/06/%E7%A7%AF%E7%B4%AF/vscode+clangd/"> </a></p><p class="categories"><a href="/categories/%E7%A7%AF%E7%B4%AF/">积累</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-06-06T15:00:09.074Z">2024-06-06</time></p><p class="title"><a href="/2024/06/06/uboot&amp;linux/uboot_analyse/"> </a></p><p class="categories"><a href="/categories/uboot-linux/">uboot_linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-06-06T15:00:09.072Z">2024-06-06</time></p><p class="title"><a href="/2024/06/06/uboot&amp;linux/uboot_3/"> </a></p><p class="categories"><a href="/categories/uboot-linux/">uboot_linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-06-06T15:00:09.071Z">2024-06-06</time></p><p class="title"><a href="/2024/06/06/uboot&amp;linux/uboot_2/"> </a></p><p class="categories"><a href="/categories/uboot-linux/">uboot_linux</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2024/06/"><span class="level-start"><span class="level-item">六月 2024</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li></ul></div></div></div><!--!--><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div><div class="card widget"><div class="card-content"><div class="notification is-danger">You need to set <code>client_id</code> and <code>slot_id</code> to show this AD unit. Please set it in <code>_config.yml</code>.</div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">follow.it</h3><form action="" method="post" target="_blank"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Hexo" height="28"></a><p class="is-size-7"><span>&copy; 2024 John Doe</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p><p class="is-size-7">© 2019</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script src="/js/pjax.js"></script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
